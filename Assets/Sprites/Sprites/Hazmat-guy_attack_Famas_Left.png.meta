@@ -1,0 +1,174 @@
+fileFormatVersion: 2
+guid: 02044fa42b5f35b4886351648236f833
+timeCreated: 1507833637
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Hazmat-guy_attack_Famas_Left_0
+    21300002: Hazmat-guy_attack_Famas_Left_1
+    21300004: Hazmat-guy_attack_Famas_Left_2
+    21300006: Hazmat-guy_attack_Famas_Left_4
+    21300008: Hazmat-guy_attack_Famas_Left_6
+    21300010: Hazmat-guy_attack_Famas_Left_9
+    21300012: Hazmat-guy_attack_Famas_Left_12
+    21300014: Hazmat-guy_attack_Famas_Left_14
+    21300016: Hazmat-guy_attack_Famas_Left_15
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Hazmat-guy_attack_Famas_Left_0
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 1535
+        width: 483
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Hazmat-guy_attack_Famas_Left_1
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 1535
+        width: 482
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Hazmat-guy_attack_Famas_Left_2
+      rect:
+        serializedVersion: 2
+        x: 1654
+        y: 1535
+        width: 508
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Hazmat-guy_attack_Famas_Left_4
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 767
+        width: 483
+        height: 747
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Hazmat-guy_attack_Famas_Left_6
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 767
+        width: 482
+        height: 747
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Hazmat-guy_attack_Famas_Left_9
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 767
+        width: 483
+        height: 747
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Hazmat-guy_attack_Famas_Left_12
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 0
+        width: 483
+        height: 745
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Hazmat-guy_attack_Famas_Left_14
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 0
+        width: 482
+        height: 745
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Hazmat-guy_attack_Famas_Left_15
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 0
+        width: 483
+        height: 745
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
