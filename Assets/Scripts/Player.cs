@@ -35,6 +35,7 @@ namespace Completed
 		//Start overrides the Start function of MovingObject
 		protected override void Start ()
 		{
+
 			//Get a component reference to the Player's animator component
 			//mainCamera = (GameObject)GameObject.FindWithTag ("Main Camera");
 			animator = GetComponent<Animator>();
@@ -60,6 +61,7 @@ namespace Completed
 		//This function is called when the behaviour becomes disabled or inactive.
 		private void OnDisable ()
 		{
+
 			//When Player object is disabled, store the current local food total in the GameManager so it can be re-loaded in next level.
 			GameManager.instance.playerFoodPoints = food;
 			GameManager.instance.playerHP = health;

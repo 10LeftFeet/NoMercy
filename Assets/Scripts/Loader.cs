@@ -12,6 +12,7 @@ namespace Completed
 		
 		void Awake ()
 		{
+
 			//Check if a GameManager has already been assigned to static variable GameManager.instance or if it's still null
 			if (GameManager.instance == null)
 				
@@ -23,8 +24,12 @@ namespace Completed
 				
 				//Instantiate SoundManager prefab
 				Instantiate(soundManager);
-
-			SceneManager.LoadScene ("Menu");
+			if (SceneManager.sceneCount == 1) {
+				SceneManager.LoadScene ("Menu");
+			} 
+			else {
+				SceneManager.UnloadScene ("_preload");
+			}
 		}
 	}
 }
