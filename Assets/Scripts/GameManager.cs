@@ -148,7 +148,12 @@ namespace Completed
 			levelImage.SetActive(true);
 			
 			//Disable this GameManager.
-			enabled = false;
+			//enabled = false;
+			level = 1;
+			playerFoodPoints = 100;
+			playerHP = 100;
+
+			SceneManager.LoadScene ("GameOver");
 		}
 		
 		//Coroutine to move enemies in sequence.
