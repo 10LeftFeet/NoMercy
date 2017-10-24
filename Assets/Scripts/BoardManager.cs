@@ -26,9 +26,9 @@ namespace Completed
 		}
 
 		private int roomMax = 11;
-		private int roomMin = 5; 
-		private int columns = Random.Range (5, 11); 										//Number of columns in our game board.
-		private int rows = Random.Range (5, 11);											//Number of rows in our game board.
+		private Count axisRange = new Count (5, 11); 
+		private int columns;												//Number of columns in our game board.
+		private int rows;													//Number of rows in our game board.																	
 		private Count wallCount = new Count (10, 18);						//Lower and upper limit for our random number of walls per level.
 		private Count foodCount = new Count (2, 6);						//Lower and upper limit for our random number of food items per level.
 		private Count HPCount = new Count (2, 6);
@@ -139,6 +139,8 @@ namespace Completed
 		//SetupScene initializes our level and calls the previous functions to lay out the game board
 		public void SetupScene (int level)
 		{
+			columns = Random.Range(axisRange.minimum, axisRange.maximum);
+			rows = Random.Range(axisRange.minimum, axisRange.maximum);
 			//Creates the outer walls and floor.
 			BoardSetup ();
 			
