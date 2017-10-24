@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Completed
 {	
@@ -22,6 +23,8 @@ namespace Completed
 				
 				//Instantiate SoundManager prefab
 				Instantiate(soundManager);
+
+			SceneManager.LoadScene ("Menu");
 		}
 	}
 }

@@ -52,15 +52,17 @@ namespace Completed
 			boardScript = GetComponent<BoardManager>();
 			
 			//Call the InitGame function to initialize the first level 
+
 		}
 		
 		//This is called each time a scene is loaded.
 		void OnLevelWasLoaded(int index)
 		{
-			//Add one to our level number.
-			level++;
-			//Call InitGame to initialize our level.
-			InitGame();
+			if (SceneManager.GetActiveScene().name == "Main") {//Add one to our level number.
+				level++;
+				//Call InitGame to initialize our level.
+				InitGame ();
+			}
 		}
 		
 		//Initializes the game for each level.
