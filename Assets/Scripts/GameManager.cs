@@ -97,6 +97,7 @@ namespace Completed
 			
 			//Clear any Enemy objects in our List to prepare for next level.
 			enemies.Clear();
+
 			
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
@@ -142,7 +143,6 @@ namespace Completed
 		public void GameOver()
 		{
 			//Set levelText to display number of levels passed and game over message
-			levelText.text = "After " + level + " days, you died.";
 			
 			//Enable black background image gameObject.
 			levelImage.SetActive(true);
@@ -154,6 +154,8 @@ namespace Completed
 			playerHP = 100;
 
 			SceneManager.LoadScene ("GameOver");
+
+
 		}
 		
 		//Coroutine to move enemies in sequence.

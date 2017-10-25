@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Completed
 {
@@ -7,6 +8,8 @@ namespace Completed
 	{
 		public AudioSource efxSource;					//Drag a reference to the audio source which will play the sound effects.
 		public AudioSource musicSource;					//Drag a reference to the audio source which will play the music.
+		public AudioSource gameOverMusicSource;
+		public AudioSource menuMusicSource;
 		public static SoundManager instance = null;		//Allows other scripts to call functions from SoundManager.				
 		public float lowPitchRange = .95f;				//The lowest a sound effect will be randomly pitched.
 		public float highPitchRange = 1.05f;			//The highest a sound effect will be randomly pitched.
@@ -56,6 +59,25 @@ namespace Completed
 			
 			//Play the clip.
 			efxSource.Play();
+		}
+
+		void OnLevelWasLoaded(int index){
+			if (SceneManager.GetActiveScene ().name == "Main" && SoundManager.instance.musicSource.isPlaying == false) {
+				SoundManager.instance.gameOverMusicSource.Stop ();
+				SoundManager.instance.menuMusicSource.Stop ();
+				SoundManager.instance.musicSource.Play ();
+			}
+			if (SceneManager.GetActiveScene ().name == "Menu") {
+				SoundManager.instance.gameOverMusicSource.Stop ();
+				SoundManager.instance.menuMusicSource.Play ();
+				SoundManager.instance.musicSource.Stop ();
+
+			}
+			if (SceneManager.GetActiveScene ().name == "GameOver") {
+				SoundManager.instance.gameOverMusicSource.Play ();
+				SoundManager.instance.menuMusicSource.Stop ();
+				SoundManager.instance.musicSource.Stop ();
+			}
 		}
 	}
 }
