@@ -25,13 +25,13 @@ namespace Completed
 			}
 		}
 
-		private int roomMax = 11;
-		private Count axisRange = new Count (5, 11); 
+		private int roomMax = 110;
+		private Count axisRange = new Count (55, 110); 
 		private int columns;												//Number of columns in our game board.
 		private int rows;													//Number of rows in our game board.																	
-		private Count wallCount = new Count (10, 18);						//Lower and upper limit for our random number of walls per level.
-		private Count foodCount = new Count (2, 6);						//Lower and upper limit for our random number of food items per level.
-		private Count HPCount = new Count (2, 6);
+		private Count wallCount = new Count (1000, 1800);						//Lower and upper limit for our random number of walls per level.
+		private Count foodCount = new Count (300, 350);						//Lower and upper limit for our random number of food items per level.
+		private Count HPCount = new Count (50, 100);
 		public GameObject exit;											//Prefab to spawn for exit.
 		public GameObject[] floorTiles;									//Array of floor prefabs.
 		public GameObject[] wallTiles;									//Array of wall prefabs.
@@ -146,18 +146,20 @@ namespace Completed
 			
 			//Reset our list of gridpositions.
 			InitialiseList ();
+
+			int difficulty = (int)Mathf.Log(level + 1, 2f);
 			
 			//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
 			
 			//Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
-			LayoutObjectAtRandom (foodTiles, foodCount.minimum, foodCount.maximum);
+			LayoutObjectAtRandom (foodTiles, foodCount.minimum / difficulty, foodCount.maximum / difficulty);
 
 
-			LayoutObjectAtRandom (HPTiles, HPCount.minimum, HPCount.maximum);
+			LayoutObjectAtRandom (HPTiles, HPCount.minimum / difficulty, HPCount.maximum / difficulty);
 
 			//Determine number of enemies based on current level number, based on a logarithmic progression
-			int enemyCount = (int)Mathf.Log(level, 2f) * 2;
+			int enemyCount = (int)Mathf.Log(level+10, 2f) * 200;
 			
 			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);

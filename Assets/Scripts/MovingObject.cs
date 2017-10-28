@@ -6,7 +6,7 @@ namespace Completed
 	//The abstract keyword enables you to create classes and class members that are incomplete and must be implemented in a derived class.
 	public abstract class MovingObject : MonoBehaviour
 	{
-		public float moveTime = 0.01f;			//Time it will take object to move, in seconds.
+		public float moveTime = 0.2f;			//Time it will take object to move, in seconds.
 		public LayerMask blockingLayer;			//Layer on which collision will be checked.
 		
 		
@@ -52,39 +52,33 @@ namespace Completed
 			if(hit.transform == null)
 			{
 				//If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
-				StartCoroutine (SmoothMovement (end));
+				SmoothMovement (end);
 				
 				//Return true to say that Move was successful
 				return true;
 			}
-			
+
 			//If something was hit, return false, Move was unsuccesful.
 			return false;
 		}
 		
 		
 		//Co-routine for moving units from one space to next, takes a parameter end to specify where to move to.
-		protected IEnumerator SmoothMovement (Vector3 end)
+		protected void SmoothMovement (Vector3 end)
 		{
-			//Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter. 
-			//Square magnitude is used instead of magnitude because it's computationally cheaper.
-			float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
-			
-			//While that distance is greater than a very small amount (Epsilon, almost zero):
-			while(sqrRemainingDistance > float.Epsilon)
+			int rate = 1000;
+			Vector3 halfDistance = (transform.position - end) / 2;
+			Vector3 newPostion = transform.position - halfDistance;
+
+
+			for (int i = 0; i < rate; i++)
 			{
-				//Find a new position proportionally closer to the end, based on the moveTime
-				Vector3 newPostion = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
-				
-				//Call MovePosition on attached Rigidbody2D and move it to the calculated position.
 				rb2D.MovePosition (newPostion);
-				
-				//Recalculate the remaining distance after moving.
-				sqrRemainingDistance = (transform.position - end).sqrMagnitude;
-				
-				//Return and loop until sqrRemainingDistance is close enough to zero to end the function
-				yield return null;
+				halfDistance = (transform.position - end) / 2;
+				newPostion = transform.position - halfDistance;
+
 			}
+			rb2D.MovePosition (end);
 		}
 		
 		
