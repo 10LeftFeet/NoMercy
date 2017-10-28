@@ -170,7 +170,8 @@ namespace Completed
 			CheckIfGameOver ();
 			
 			//Set the playersTurn boolean of GameManager to false now that players turn is over.
-			GameManager.instance.playersTurn = false;
+			if (food >= 0)
+				GameManager.instance.playersTurn = false;
 
 
 		}

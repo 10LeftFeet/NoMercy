@@ -30,7 +30,7 @@ namespace Completed
 		private int columns;												//Number of columns in our game board.
 		private int rows;													//Number of rows in our game board.																	
 		private Count wallCount = new Count (1000, 1800);						//Lower and upper limit for our random number of walls per level.
-		private Count foodCount = new Count (300, 350);						//Lower and upper limit for our random number of food items per level.
+		private Count foodCount = new Count (400, 450);						//Lower and upper limit for our random number of food items per level.
 		private Count HPCount = new Count (50, 100);
 		public GameObject exit;											//Prefab to spawn for exit.
 		public GameObject[] floorTiles;									//Array of floor prefabs.
@@ -147,7 +147,7 @@ namespace Completed
 			//Reset our list of gridpositions.
 			InitialiseList ();
 
-			int difficulty = (int)Mathf.Log(level + 1, 2f);
+			int difficulty = (int)Mathf.Log(level + 10, 2f);
 			
 			//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
@@ -159,7 +159,7 @@ namespace Completed
 			LayoutObjectAtRandom (HPTiles, HPCount.minimum / difficulty, HPCount.maximum / difficulty);
 
 			//Determine number of enemies based on current level number, based on a logarithmic progression
-			int enemyCount = (int)Mathf.Log(level+10, 2f) * 200;
+			int enemyCount = (int)Mathf.Log(level+1, 2f) * 200;
 			
 			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);

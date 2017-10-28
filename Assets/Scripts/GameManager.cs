@@ -10,7 +10,7 @@ namespace Completed
 	public class GameManager : MonoBehaviour
 	{
 		public float levelStartDelay = 2f;						//Time to wait before starting level, in seconds.
-		public float turnDelay = 0.1f;							//Delay between each Player turn.
+		public float turnDelay = 0.2f;							//Delay between each Player turn.
 		public int playerFoodPoints = 100;						//Starting value for Player food points.
 		public int playerHP = 100;
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
@@ -152,6 +152,7 @@ namespace Completed
 			level = 1;
 			playerFoodPoints = 100;
 			playerHP = 100;
+
 
 			SceneManager.LoadScene ("GameOver");
 
