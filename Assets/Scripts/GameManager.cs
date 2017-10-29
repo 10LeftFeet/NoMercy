@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Completed
 {
@@ -15,7 +16,7 @@ namespace Completed
 		public int playerHP = 100;
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
 		[HideInInspector] public bool playersTurn = true;		//Boolean to check if it's players turn, hidden in inspector but public.
-		
+		private Text DayText;
 		
 		private Text levelText;									//Text to display current level number.
 		private GameObject levelImage;							//Image to block out level as levels are being set up, background for levelText.
@@ -88,6 +89,7 @@ namespace Completed
 			
 			//Set the text of levelText to the string "Day" and append the current level number.
 			levelText.text = "Day " + level;
+
 			
 			//Set levelImage to active blocking player's view of the game board during setup.
 			levelImage.SetActive(true);
@@ -101,6 +103,10 @@ namespace Completed
 			
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
+
+			DayText = GameObject.Find("DayText").GetComponent<Text>();
+
+			DayText.text = "Day " + level;
 
 
 			
