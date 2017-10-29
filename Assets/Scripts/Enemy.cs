@@ -57,14 +57,15 @@ namespace Completed
 		//MoveEnemy is called by the GameManger each turn to tell each Enemy to try to move towards the player.
 		public void MoveEnemy ()
 		{
-			
+			if (this == null)
+				return;
 			//Declare variables for X and Y axis move directions, these range from -1 to 1.
 			//These values allow us to choose between the cardinal directions: up, down, left and right.
 			int xDir = 0;
 			int yDir = 0;
 
 
-			
+
 			//If the difference in positions is approximately zero (Epsilon) do the following:
 			if(Mathf.Abs (target.position.x - transform.position.x) < float.Epsilon)
 				
