@@ -14,6 +14,7 @@ namespace Completed
 		public float turnDelay = 0.2f;							//Delay between each Player turn.
 		public int playerFoodPoints = 100;						//Starting value for Player food points.
 		public int playerHP = 100;
+		public int playerAmmo = 0;
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
 		[HideInInspector] public bool playersTurn = true;		//Boolean to check if it's players turn, hidden in inspector but public.
 		private Text DayText;
@@ -148,16 +149,14 @@ namespace Completed
 		//GameOver is called when the player reaches 0 food or health points
 		public void GameOver()
 		{
-			//Set levelText to display number of levels passed and game over message
 			
 			//Enable black background image gameObject.
 			levelImage.SetActive(true);
-			
-			//Disable this GameManager.
-			//enabled = false;
+
 			level = 1;
 			playerFoodPoints = 100;
 			playerHP = 100;
+			playerAmmo = 0;
 
 
 			SceneManager.LoadScene ("GameOver");

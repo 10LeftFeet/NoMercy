@@ -9,13 +9,21 @@ namespace Completed
 	public class Player : MovingObject
 	{
 		public float restartLevelDelay = 1f;		//Delay time in seconds to restart level.
-		public int pointsPerFood = 10;				//Number of points to add to player food points when picking up a food object.
-		public int pointsPerSoda = 20;				//Number of points to add to player food points when picking up a soda object.
+		public int pointsPerFood = 15;				//Number of points to add to player food points when picking up a food object.
+		public int pointsPerSoda = 25;				//Number of points to add to player food points when picking up a soda object.
 		public int pointsPerFirstAid = 50;
 		public int pointsPerBandage = 10;
+		public int pointsPerMedkit = 25;
+		public int pointsPerWorkBench = 10;
 		public int wallDamage = 1;					//How much damage a player does to a wall when chopping it.
+		public int knifeDamage = 10;
+		public int gunDamage = 20;
+		private BoxCollider2D boxCollider;
 		public Text foodText;						//UI Text to display current player food total.
 		public Text HPText;
+		public Text ammoText;
+		public Text blockingText;
+		public Text ammoWarning;
 		public AudioClip moveSound1;				//1 of 2 Audio clips to play when player moves.
 		public AudioClip moveSound2;				//2 of 2 Audio clips to play when player moves.
 		public AudioClip eatSound1;					//1 of 2 Audio clips to play when player collects a food object.
@@ -24,11 +32,17 @@ namespace Completed
 		public AudioClip drinkSound2;				//2 of 2 Audio clips to play when player collects a soda object.
 		public AudioClip healSound1;
 		public AudioClip healSound2;
+		public AudioClip healSound3;
+		public AudioClip reload;
+		public AudioClip aimSound;
 		public AudioClip gameOverSound;				//Audio clip to play when player dies.
-		
+		public AudioClip knifeSlash;
+		public AudioClip gunShot;
+		public bool move = true;
 		private Animator animator;					//Used to store a reference to the Player's animator component.
 		private int food;							//Used to store player food points total during level.
 		private int health;
+		private int ammo;
 		private Vector2 touchOrigin = -Vector2.one;	//Used to store location of screen touch origin for mobile controls.
 		
 		
@@ -43,12 +57,15 @@ namespace Completed
 			//Get the current food point total stored in GameManager.instance between levels.
 			food = GameManager.instance.playerFoodPoints;
 			health = GameManager.instance.playerHP;
-
+			ammo = GameManager.instance.playerAmmo;
+			ammoWarning.enabled = false;
+			blockingText.enabled = false;
 
 			
 			//Set the foodText to reflect the current player food total.
 			foodText.text = "Food: " + food;
-			HPText.text = "health: " + health;
+			HPText.text = "Health: " + health;
+			ammoText.text = "Ammo: " + ammo;
 
 
 
@@ -65,6 +82,7 @@ namespace Completed
 			//When Player object is disabled, store the current local food total in the GameManager so it can be re-loaded in next level.
 			GameManager.instance.playerFoodPoints = food;
 			GameManager.instance.playerHP = health;
+			GameManager.instance.playerAmmo = ammo;
 
 		}
 
@@ -136,12 +154,73 @@ namespace Completed
 			//Check if we have a non-zero value for horizontal or vertical
 			if(horizontal != 0 || vertical != 0)
 			{
-				//Call AttemptMove passing in the generic parameter Wall, since that is what Player may interact with if they encounter one (by attacking it)
+				//Call AttemptMove passing in the generic parameter Enemy and then Wall, since that is what Player may interact with if they encounter one (by attacking it)
 				//Pass in horizontal and vertical as parameters to specify the direction to move Player in.
-				AttemptMove<Wall> (horizontal, vertical);
+				if (move == true) {
+					AttemptMove<Enemy> (horizontal, vertical);
+					food++;
+					AttemptMove<Wall> (horizontal, vertical);
+				}
+				else {
+					if (ammo >0)
+					AttemptShoot<Enemy> (horizontal, vertical);
+				} 
 			}
+		} 
+
+		protected void AttemptShoot<T> (int xDir, int yDir){
+			RaycastHit2D hit;
+			Debug.Log ("attemptshoot");
+			//Set canShoot to true if Move was successful, false if failed.
+			for (int i = 1; i < 6; i++) {
+				bool canShoot = Shoot (xDir * i, yDir * i, out hit);
+
+				//Check if something was hit by linecast
+				if (hit.transform != null) {
+
+					//Get a component reference to the component of type T attached to the object that was hit
+					T hitComponent = hit.transform.GetComponent <T> ();
+
+					//If canMove is false and hitComponent is not equal to null, meaning MovingObject is blocked and has hit something it can interact with.
+					if (!canShoot && hitComponent != null) {
+						//Call the OnCantMove function and pass it hitComponent as a parameter.
+						onShoot (hitComponent);
+						return;
+					}
+					blockingText.enabled = true;
+					return;
+				}
+			}
+
 		}
-		
+
+		protected bool Shoot (int xDir, int yDir, out RaycastHit2D hit)
+		{
+			boxCollider = GetComponent <BoxCollider2D> ();
+			//Store start position to move from, based on objects current transform position.
+			Vector2 start = transform.position;
+
+			// Calculate end position based on the direction parameters passed in when calling Move.
+			Vector2 end = start + new Vector2 (xDir, yDir);
+
+			//Disable the boxCollider so that linecast doesn't hit this object's own collider.
+			boxCollider.enabled = false;
+
+			//Cast a line from start point to end point checking collision on blockingLayer.
+			hit = Physics2D.Linecast (start, end, blockingLayer);
+
+			//Re-enable boxCollider after linecast
+			this.boxCollider.enabled = true;
+
+			//Check if anything was hit
+			if(hit.transform == null)
+				//Return true to say that Move was successful
+				return true;
+
+
+			//If something was hit, return false, Move was unsuccesful.
+			return false;
+		}
 		//AttemptMove overrides the AttemptMove function in the base class MovingObject
 		//AttemptMove takes a generic parameter T which for Player will be of the type Wall, it also takes integers for x and y direction to move in.
 		protected override void AttemptMove <T> (int xDir, int yDir)
@@ -152,10 +231,11 @@ namespace Completed
 			//Update food text display to reflect current score.
 			foodText.text = "Food: " + food;
 			HPText.text = "health: " + health;
+			ammoText.text = "Ammo: " + ammo;
 
 			//Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
 			base.AttemptMove <T> (xDir, yDir);
-			
+
 			//Hit allows us to reference the result of the Linecast done in Move.
 			RaycastHit2D hit;
 			
@@ -175,20 +255,40 @@ namespace Completed
 
 
 		}
+
+		protected void onShoot<T>(T component){
+			ammo--;
+			blockingText.enabled = false;
+			Enemy hitEnemy = component as Enemy;
+
+			SoundManager.instance.RandomizeSfx(gunShot);
+			hitEnemy.DamageEnemy (gunDamage);
 		
+		}
 		
 		//OnCantMove overrides the abstract function OnCantMove in MovingObject.
 		//It takes a generic parameter T which in the case of Player is a Wall which the player can attack and destroy.
 		protected override void OnCantMove <T> (T component)
 		{
-			//Set hitWall to equal the component passed in as a parameter.
-			Wall hitWall = component as Wall;
+			if (component.tag == "Wall") {
+				//Set hitWall to equal the component passed in as a parameter.
+				Wall hitWall = component as Wall;
 			
-			//Call the DamageWall function of the Wall we are hitting.
-			hitWall.DamageWall (wallDamage);
-			
-			//Set the attack trigger of the player's animation controller in order to play the player's attack animation.
-			animator.SetTrigger ("playerChop");
+				//Call the DamageWall function of the Wall we are hitting.
+				hitWall.DamageWall (wallDamage);
+				Debug.Log ("WallDestroyed");
+				//Set the attack trigger of the player's animation controller in order to play the player's attack animation.
+				animator.SetTrigger ("playerChop");
+			}
+			else{
+				Enemy hitEnemy = component as Enemy;
+
+				SoundManager.instance.RandomizeSfx(knifeSlash);
+				hitEnemy.DamageEnemy (knifeDamage);
+				Debug.Log ("enemyHit");
+
+
+			}
 		}
 		
 		
@@ -220,7 +320,14 @@ namespace Completed
 				//Disable the food object the player collided with.
 				other.gameObject.SetActive (false);
 			}
-			
+			else if(other.tag == "Enemy")
+			{
+				
+				SoundManager.instance.RandomizeSfx (knifeSlash);
+				LoseHP(5);
+				animator.SetTrigger ("enemyDeath");
+				other.gameObject.SetActive (false);
+			}
 			//Check if the tag of the trigger collided with is Soda.
 			else if(other.tag == "Soda")
 			{
@@ -238,14 +345,12 @@ namespace Completed
 			}
 			else if(other.tag == "First Aid")
 			{
-				//Add pointsPerFood to the players current food total.
 				health += pointsPerFirstAid;
 
 				if (health > 100) 
 				{
 					health = 100;
 				}
-				//Update foodText to represent current total and notify player that they gained points
 				HPText.text = "+" + pointsPerFirstAid + " health: " + health;
 
 				//Call the RandomizeSfx function of SoundManager and pass in two eating sounds to choose between to play the eating sound effect.
@@ -271,6 +376,38 @@ namespace Completed
 				SoundManager.instance.RandomizeSfx (healSound2);
 
 				//Disable the food object the player collided with.
+				other.gameObject.SetActive (false);
+			}
+			else if(other.tag == "MedKit")
+			{
+				//Add pointsPerFood to the players current food total.
+				health += pointsPerMedkit;
+
+				if (health > 100) 
+				{
+					health = 100;
+				}
+
+				//Update foodText to represent current total and notify player that they gained points
+				HPText.text = "+" + pointsPerMedkit + " health: " + health;
+
+				//Call the RandomizeSfx function of SoundManager and pass in two eating sounds to choose between to play the eating sound effect.
+				SoundManager.instance.RandomizeSfx (healSound3);
+
+				//Disable the food object the player collided with.
+				other.gameObject.SetActive (false);
+			}
+			else if(other.tag == "AmmoCrate")
+			{
+				ammo += pointsPerWorkBench;
+
+
+
+				HPText.text = "+" + pointsPerWorkBench + " Ammo: " + ammo;
+
+
+				SoundManager.instance.RandomizeSfx (reload);
+
 				other.gameObject.SetActive (false);
 			}
 		}
@@ -300,8 +437,19 @@ namespace Completed
 			//Check to see if game has ended.
 			CheckIfGameOver ();
 		}
+
+		public void movePressed(){
+			move = true;
+			ammoWarning.enabled = false;
+			blockingText.enabled = false;
+		}
 		
-		
+		public void aimPressed(){
+			move = false;
+			if (ammo == 0) ammoWarning.enabled = true;
+			SoundManager.instance.RandomizeSfx (aimSound);
+		}
+
 		//CheckIfGameOver checks if the player is out of food or health points and if so, ends the game.
 		private void CheckIfGameOver ()
 		{
@@ -316,6 +464,8 @@ namespace Completed
 
 				health = 100;
 				food = 100;
+				ammo = 0;
+
 				
 				//Call the GameOver function of GameManager.
 				GameManager.instance.GameOver ();

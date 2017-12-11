@@ -32,10 +32,12 @@ namespace Completed
 		private Count wallCount = new Count (1000, 1800);						//Lower and upper limit for our random number of walls per level.
 		private Count foodCount = new Count (400, 450);						//Lower and upper limit for our random number of food items per level.
 		private Count HPCount = new Count (50, 100);
+		private Count ammoCount = new Count (25, 50);
 		public GameObject exit;											//Prefab to spawn for exit.
 		public GameObject[] floorTiles;									//Array of floor prefabs.
 		public GameObject[] wallTiles;									//Array of wall prefabs.
 		public GameObject[] foodTiles;									//Array of food prefabs.
+		public GameObject[] ammoTiles;	
 		public GameObject[] HPTiles;
 		public GameObject[] enemyTiles;									//Array of enemy prefabs.
 		public GameObject[] outerWallTiles;								//Array of outer tile prefabs.
@@ -157,6 +159,8 @@ namespace Completed
 
 
 			LayoutObjectAtRandom (HPTiles, HPCount.minimum / difficulty, HPCount.maximum / difficulty);
+
+			LayoutObjectAtRandom (ammoTiles, ammoCount.minimum / difficulty, ammoCount.maximum / difficulty);
 
 			//Determine number of enemies based on current level number, based on a logarithmic progression
 			int enemyCount = (int)Mathf.Log(level+1, 2f) * 200;

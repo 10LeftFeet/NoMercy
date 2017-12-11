@@ -10,6 +10,9 @@ TagManager:
   - Soda
   - Bandage
   - First Aid
+  - AmmoCrate
+  - MedKit
+  - Wall
   layers:
   - Default
   - TransparentFX

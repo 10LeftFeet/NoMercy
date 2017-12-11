@@ -48,7 +48,7 @@ Rigidbody2D:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &6195068
 BoxCollider2D:
@@ -99,6 +99,8 @@ MonoBehaviour:
   playerDamage: 10
   attackSound1: {fileID: 8300000, guid: 0db8cac2749584a009540aa5671ee80d, type: 3}
   attackSound2: {fileID: 8300000, guid: 114514a3b3697484ebaa08f7fbf842d3, type: 3}
+  hp: 20
+  knifeSlash: {fileID: 8300000, guid: 9542b2005bff64d4f833517a653edcf2, type: 3}
 --- !u!212 &21295068
 SpriteRenderer:
   m_ObjectHideFlags: 1
