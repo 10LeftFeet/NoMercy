@@ -815,11 +815,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22499872, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 250
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 22499872, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 145
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 22499872, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_SizeDelta.x
@@ -831,19 +831,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22499872, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22499872, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22499872, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22499872, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22499872, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_Pivot.x
@@ -984,6 +984,10 @@ Prefab:
       propertyPath: blockingText
       value: 
       objectReference: {fileID: 343412299}
+    - target: {fileID: 11446652, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
+      propertyPath: pointsPerWorkBench
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28b53fc28d3a140c392f0e2d919f9de1, type: 2}
   m_IsPrefabParent: 0

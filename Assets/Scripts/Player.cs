@@ -14,7 +14,7 @@ namespace Completed
 		public int pointsPerFirstAid = 50;
 		public int pointsPerBandage = 10;
 		public int pointsPerMedkit = 25;
-		public int pointsPerWorkBench = 10;
+		public int pointsPerWorkBench = 5;
 		public int wallDamage = 1;					//How much damage a player does to a wall when chopping it.
 		public int knifeDamage = 10;
 		public int gunDamage = 20;
@@ -172,7 +172,7 @@ namespace Completed
 			RaycastHit2D hit;
 			Debug.Log ("attemptshoot");
 			//Set canShoot to true if Move was successful, false if failed.
-			for (int i = 1; i < 6; i++) {
+			for (int i = 1; i < 5; i++) {
 				bool canShoot = Shoot (xDir * i, yDir * i, out hit);
 
 				//Check if something was hit by linecast
@@ -183,6 +183,7 @@ namespace Completed
 
 					//If canMove is false and hitComponent is not equal to null, meaning MovingObject is blocked and has hit something it can interact with.
 					if (!canShoot && hitComponent != null) {
+						ammo--;
 						//Call the OnCantMove function and pass it hitComponent as a parameter.
 						onShoot (hitComponent);
 						return;
@@ -257,7 +258,8 @@ namespace Completed
 		}
 
 		protected void onShoot<T>(T component){
-			ammo--;
+			
+			ammoText.text = "Ammo: " + ammo;
 			blockingText.enabled = false;
 			Enemy hitEnemy = component as Enemy;
 
@@ -285,7 +287,7 @@ namespace Completed
 
 				SoundManager.instance.RandomizeSfx(knifeSlash);
 				hitEnemy.DamageEnemy (knifeDamage);
-				Debug.Log ("enemyHit");
+
 
 
 			}
@@ -403,7 +405,7 @@ namespace Completed
 
 
 
-				HPText.text = "+" + pointsPerWorkBench + " Ammo: " + ammo;
+				ammoText.text = "+" + pointsPerWorkBench + " Ammo: " + ammo;
 
 
 				SoundManager.instance.RandomizeSfx (reload);
