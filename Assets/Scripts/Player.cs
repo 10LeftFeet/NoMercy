@@ -473,6 +473,16 @@ namespace Completed
 				GameManager.instance.GameOver ();
 			}
 		}
+		public void BackToMenu(){
+			health = 100;
+			food = 100;
+			ammo = 0;
+
+
+			//Call the GameOver function of GameManager.
+			GameManager.instance.GameOver ();
+
+		}
 	}
 }
 
