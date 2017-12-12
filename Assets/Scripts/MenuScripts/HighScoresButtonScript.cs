@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class HighScoresButtonScript : MonoBehaviour {
 
 
-	public void StartGame(){
-		SceneManager.LoadScene ("HighScores");
+	public void ScoreMenu(){
+		SceneManager.LoadScene ("High Scores");
 
 	}
 }

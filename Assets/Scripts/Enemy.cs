@@ -18,6 +18,8 @@ namespace Completed
 		public int hp = 20;	
 		public int move = 1;
 		public AudioClip knifeSlash;
+		public Vector3 location;
+		public GameObject skull;
 		
 		//Start overrides the virtual Start function of the base class.
 		protected override void Start ()
@@ -98,7 +100,11 @@ namespace Completed
 
 			if (hp <= 0) {
 				animator.SetTrigger ("EnemyDeath");
-				Destroy(gameObject);
+				move = 0;
+				location = gameObject.transform.position;
+				Destroy (gameObject);
+				Instantiate (skull, location, Quaternion.identity);
+
 
 			}
 		}

@@ -27,7 +27,7 @@ namespace Completed
 		private bool enemiesMoving;								//Boolean to check if enemies are moving.
 		private bool doingSetup = true;							//Boolean to check if we're setting up board, prevent Player from moving during setup.
 		private bool levelLoadedCalled = false;
-		
+		private HighScore scoreScript;
 		
 		//Awake is always called before any Start functions
 		void Awake()
@@ -52,6 +52,8 @@ namespace Completed
 			
 			//Get a component reference to the attached BoardManager script
 			boardScript = GetComponent<BoardManager>();
+
+			scoreScript = GetComponent<HighScore>();
 
 			if (levelLoadedCalled == false && SceneManager.GetActiveScene().name == "Main") {
 				InitGame ();
@@ -152,6 +154,9 @@ namespace Completed
 			
 			//Enable black background image gameObject.
 			levelImage.SetActive(true);
+			level--;   // Game Manager adds 1 to level before a new level is called, so this ensures it doesn't count that addition
+			scoreScript.score = level;
+			scoreScript.scoreCheck();
 
 			level = 1;
 			playerFoodPoints = 100;

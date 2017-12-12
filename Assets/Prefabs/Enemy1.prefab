@@ -100,7 +100,10 @@ MonoBehaviour:
   attackSound1: {fileID: 8300000, guid: 0db8cac2749584a009540aa5671ee80d, type: 3}
   attackSound2: {fileID: 8300000, guid: 114514a3b3697484ebaa08f7fbf842d3, type: 3}
   hp: 20
+  move: 1
   knifeSlash: {fileID: 8300000, guid: 9542b2005bff64d4f833517a653edcf2, type: 3}
+  location: {x: 0, y: 0, z: 0}
+  skull: {fileID: 185456, guid: 166601adf87bece449ad817b235ff60f, type: 2}
 --- !u!212 &21295068
 SpriteRenderer:
   m_ObjectHideFlags: 1

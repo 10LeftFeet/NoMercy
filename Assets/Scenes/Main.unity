@@ -855,7 +855,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 157648, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_Name
-      value: Menu Button
+      value: MainMenu Button
       objectReference: {fileID: 0}
     - target: {fileID: 11438054, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_Text
@@ -864,7 +864,7 @@ Prefab:
     - target: {fileID: 11499402, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1710851993}
+      objectReference: {fileID: 801553472}
     - target: {fileID: 11499402, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: BackToMenu

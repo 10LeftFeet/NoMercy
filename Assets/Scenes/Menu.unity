@@ -263,7 +263,7 @@ Prefab:
     - target: {fileID: 11499402, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1761825338}
+      objectReference: {fileID: 1347875248}
     - target: {fileID: 11438054, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_FontData.m_HorizontalOverflow
       value: 1
@@ -287,6 +287,10 @@ Prefab:
     - target: {fileID: 11438054, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
       propertyPath: m_Text
       value: High Scores
+      objectReference: {fileID: 0}
+    - target: {fileID: 11499402, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ScoreMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd697624906a71f46b4124961d43a9cd, type: 2}
